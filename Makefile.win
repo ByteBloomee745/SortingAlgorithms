@@ -1,0 +1,42 @@
+# Project: Project1
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = main_private.res
+OBJ      = main.o sort_algorithms.o performance.o utils.o $(RES)
+LINKOBJ  = main.o sort_algorithms.o performance.o utils.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"C:/Users/pc/OneDrive/Desktop/SLD2/SDL2-2.30.9/x86_64-w64-mingw32/lib" -static-libgcc                                                                                                                   -lmingw32
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Users/pc/OneDrive/Desktop/SLD2/SDL2-2.30.9/x86_64-w64-mingw32/include"
+BIN      = main.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+sort_algorithms.o: sort_algorithms.c
+	$(CC) -c sort_algorithms.c -o sort_algorithms.o $(CFLAGS)
+
+performance.o: performance.c
+	$(CC) -c performance.c -o performance.o $(CFLAGS)
+
+utils.o: utils.c
+	$(CC) -c utils.c -o utils.o $(CFLAGS)
+
+main_private.res: main_private.rc Makefile.rc
+	$(WINDRES) -i main_private.rc --input-format=rc -o main_private.res -O coff 
+
